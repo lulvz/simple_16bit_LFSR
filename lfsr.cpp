@@ -3,24 +3,9 @@
 
 #include "lfsr.hpp"
 
-LFSR::LFSR(){
-    this->seed = 0b0000111100001111;
-    this->tap = 7;
+LFSR::LFSR() : seed(0b0000111100001111), originSeed(seed), tap(7) {}
 
-    // backup for seed in case of reset
-    this->originSeed = seed;
-}
-
-LFSR::LFSR(uint16_t seed, uint16_t tap) {
-    // the seed for the generator
-    this->seed = seed;
-    // tap starts counting from the rightmost bit 
-    // of the seed and starts at 0
-    this->tap = tap;
-
-    // backup for seed in case of reset
-    this->originSeed = seed;
-}
+LFSR::LFSR(uint16_t seed, uint16_t tap) : seed(seed), originSeed(seed), tap(tap) {}
 
 uint8_t LFSR::bitAt(uint32_t i){
     return (uint8_t)(this->seed >> i & 1);
